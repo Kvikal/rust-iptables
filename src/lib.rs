@@ -174,7 +174,7 @@ impl IPTables {
     /// Returns true if the chain exists.
     #[cfg(target_os = "linux")]
     pub fn chain_exists(&self, table: &str, chain: &str) -> IPTResult<bool> {
-        match self.run(&["-t", table, "-L", chain]) {
+        match self.run(&["-t", table, "-n", "-L", chain]) {
             Ok(output) => Ok(output.status.success()),
             Err(err) => Err(err),
         }
